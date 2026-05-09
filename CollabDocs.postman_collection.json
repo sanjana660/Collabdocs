@@ -1,0 +1,823 @@
+{
+  "info": {
+    "_postman_id": "c3947493-277e-43ce-bd79-61c8a9232108",
+    "name": "Collabdocs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21777833"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Create new user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"first_name\": \"Oswin\",\r\n  \"last_name\": \"Gale\",\r\n  \"email\": \"Oswin@example.com\",\r\n  \"phone\": \"+11110000002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workspace",
+      "item": [
+        {
+          "name": "Create workspace +auto-add owner as admin member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"Medical Team\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get workspace with member count",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/f462cdeb-1336-4096-b936-e01abcf4f0d2/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "f462cdeb-1336-4096-b936-e01abcf4f0d2",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New users to workspace with role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user_id\": \"c71136cd-bc62-471f-a600-62bc98a1eedd\",\r\n  \"role\": \"editor\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/f462cdeb-1336-4096-b936-e01abcf4f0d2/members/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "f462cdeb-1336-4096-b936-e01abcf4f0d2",
+                "members",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List all members with their roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/f462cdeb-1336-4096-b936-e01abcf4f0d2/members/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "f462cdeb-1336-4096-b936-e01abcf4f0d2",
+                "members",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Doc Count, Member Count, Total comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/f462cdeb-1336-4096-b936-e01abcf4f0d2/summary/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "f462cdeb-1336-4096-b936-e01abcf4f0d2",
+                "summary",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Create doc + first atomic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Business Brief\",\r\n  \"content\": \"Initial document body with detailed content\",\r\n  \"workspace_id\": \"f462cdeb-1336-4096-b936-e01abcf4f0d2\",\r\n  \"status\": \"draft\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update document content - saves a new version",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Business Brief\",\r\n  \"content\": \"Updated document content\",\r\n  \"workspace_id\": \"f462cdeb-1336-4096-b936-e01abcf4f0d2\",\r\n  \"status\": \"published\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/6d3732d2-ed47-42db-ab9b-d341f79c1043/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "6d3732d2-ed47-42db-ab9b-d341f79c1043",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Docs - filter by workspace, status, tag name, search title",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List docs filter by workspace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/?workspace_ids=f462cdeb-1336-4096-b936-e01abcf4f0d2",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "workspace_ids",
+                  "value": "f462cdeb-1336-4096-b936-e01abcf4f0d2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List docs filter by status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/?status_in=draft",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status_in",
+                  "value": "draft"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List docs - search by titlr/content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/?search=brief",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "brief"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List docs - search by title",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/?title_icontains=business",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "title_icontains",
+                  "value": "business"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "All versions of document in order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/6d3732d2-ed47-42db-ab9b-d341f79c1043/versions/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "6d3732d2-ed47-42db-ab9b-d341f79c1043",
+                "versions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Version count, comment count contributor count",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/6d3732d2-ed47-42db-ab9b-d341f79c1043/stats/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "6d3732d2-ed47-42db-ab9b-d341f79c1043",
+                "stats",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add one or more tags to a document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tag_ids\": [\"4a353447-dc6f-481b-93fa-252327385c62\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/6d3732d2-ed47-42db-ab9b-d341f79c1043/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "6d3732d2-ed47-42db-ab9b-d341f79c1043",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Add a top level comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"document\": \"6d3732d2-ed47-42db-ab9b-d341f79c1043\",\r\n  \"content\": \"This is the first comment\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/comments/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "comments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reply to a comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"document\": \"6d3732d2-ed47-42db-ab9b-d341f79c1043\",\r\n  \"content\": \"This is a reply to the comment above\",\r\n  \"parent\": \"6dc73aaa-7118-4be6-8b3b-907cd02278aa\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/comments/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "comments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List all comments for a document",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/comments/?document=6d3732d2-ed47-42db-ab9b-d341f79c1043",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "comments",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "document",
+                  "value": "6d3732d2-ed47-42db-ab9b-d341f79c1043"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tags & Audit Logs",
+      "item": [
+        {
+          "name": "Create a tag",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Insurance\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Audit logs filtered by actor id and date range",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Add created tag to existing doc",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-ID",
+                "value": "fd967d0e-6f86-4ebb-a625-b82ba901bcaa",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"tag_ids\": [\"8ec9caa1-36ea-4153-b729-148c299fef1e\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/6d3732d2-ed47-42db-ab9b-d341f79c1043/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "6d3732d2-ed47-42db-ab9b-d341f79c1043",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
