@@ -240,6 +240,61 @@ Query parameters:
 - Request logging middleware prints request method, path, response status, and timing for every request; this can be found in `core/middleware.py`.
 - Role checks and permission logic live in `core/permissions.py` and are referenced by views in `core/views.py`.
 
+### Atomic Transactions with Rollback
+
+The codebase uses Django's `transaction.atomic()` decorator and context manager to ensure data consistency:
+
+**Workspace Creation (Atomic):**
+```python
+from django.db import transaction
+
+with transaction.atomic():
+    workspace = Workspace.objects.create(name='My Workspace', owner=owner)
+    WorkspaceMember.objects.create(workspace=workspace, user=owner, role='admin')
+    # If either fails, BOTH are rolled back
+```
+
+**Document Creation + First Version (Atomic):**
+```python
+with transaction.atomic():
+    document = Document.objects.create(
+        title='Doc', content='...', workspace=workspace, created_by=user
+    )
+    DocumentVersion.objects.create(
+        document=document, content='...', version_number=1, saved_by=user
+    )
+    # If either fails, the entire transaction is rolled back
+```
+
+**Manual Validation with Rollback:**
+```python
+with transaction.atomic():
+    tag = Tag.objects.create(name='python')
+    document.tags.add(tag)
+    
+    # Validation check
+    if document.title == '':
+        raise ValueError("Title cannot be empty")  # Triggers rollback
+    
+    # If validation passes, changes are committed
+```
+
+**Nested Transactions (Savepoints):**
+```python
+with transaction.atomic():
+    outer_obj = Model.objects.create(...)  # Outer transaction
+    
+    try:
+        with transaction.atomic():
+            nested_obj = Model.objects.create(...)  # Nested (savepoint)
+            raise ValueError("Nested error")  # This rolls back only nested
+    except ValueError:
+        pass  # Outer continues and commits outer_obj
+```
+
+For complete working examples, see `scripts/atomic_transaction_examples.py`.
+
+
 ## Running tests
 If there are tests included in this repository, run them with:
 
