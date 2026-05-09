@@ -93,6 +93,9 @@ class Document(models.Model):
 
     def save(self, *args, saved_by: User | None = None, **kwargs):
         super().save(*args, **kwargs)
+        # Store saved_by as temporary attribute for signal to use in AuditLog
+        if saved_by:
+            self._audit_actor = saved_by
         version_number = self.versions.count() + 1
         DocumentVersion.objects.create(
             document=self,
