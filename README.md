@@ -2,6 +2,12 @@
 
 CollabDocs is an API-first backend for collaborative document editing and review. It provides document versioning, threaded comments, tagging, role-based access control (RBAC), and audit-friendly request logging so teams can integrate document collaboration into other services or UIs.
 
+## 📹 Demo Video
+
+Watch a complete walkthrough of CollabDocs API features and usage:
+
+[Loom Recording: CollabDocs API Demo](https://www.loom.com/share/0c72eccde17b4557bc3a702ea1f9d998)
+
 **Key features:**
 - Document creation, editing, and deletion with automatic `DocumentVersion` snapshots for every save.
 - Threaded comments on documents and document versions.
